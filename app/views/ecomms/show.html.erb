@@ -1,0 +1,9 @@
+<h1>Информация о товаре</h1>
+
+<p><strong>Название:</strong> <%= @ecomm.title %></p>
+<p><strong>Описание:</strong> <%= @ecomm.description %></p>
+<p><strong>Цена:</strong> <%= @ecomm.price %></p>
+<p><strong>Доставка из:</strong> <%= @ecomm.location %></p>
+
+<p><%= link_to 'Редактировать', edit_ecomm_path(@ecomm) %></p>
+<p><%= link_to 'Назад', ecomms_path %></p>

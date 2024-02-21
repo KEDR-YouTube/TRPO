@@ -1,0 +1,104 @@
+<h1>Список товаров</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Название</th>
+      <th>Описание</th>
+      <th>Цена</th>
+      <th>Доставка из </th>
+      <th colspan="5"></th>
+    </tr>
+  </thead>
+  
+  <tbody>
+    <% @ecomms.each do |ecomm| %>
+      <tr>
+        <td><%= ecomm.title %></td>
+        <td><%= ecomm.description %></td>
+        <td><%= ecomm.price %></td>
+        <td><%= ecomm.location %></td>
+        <td><%= link_to 'Просмотреть', ecomm %></td>
+        <td><%= link_to 'Редактировать', edit_ecomm_path(ecomm) %></td>
+        <td><%= link_to 'Удалить', ecomm, 'data-turbo-method': :delete, data: { confirm: 'Вы уверены?' } %></td>
+         <%= form_with(url: cart_add_path) do |f| %>
+      <td><%= f.hidden_field :id, value: ecomm.id %>
+      <%= f.number_field :quantity, value: 0, min: 1 %>
+      <%= f.submit "Добавить в корзину" %></td>
+    <% end %> 
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<p><%= link_to 'Добавить товар', new_ecomm_path %></p>
+<style>/* Add the following styles for the design of the table and headings */
+h1 {
+  color: #2c3e50; /* Dark blue color for the heading */
+  font-size: 32px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+thead {
+  background-color: #3498db; /* Blue color for the table header */
+  color: white;
+}
+
+th, td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid #bdc3c7; /* Light gray border between rows */
+}
+
+th {
+  text-align: center;
+}
+
+tbody tr:hover {
+  background-color: #ecf0f1; /* Light background color on hover */
+}
+
+/* Add some styles for the links and buttons */
+a {
+  color: #3498db; /* Blue color for links */
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.btn {
+  padding: 10px 15px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #2980b9; /* Darker blue on hover */
+}
+
+/* Add styles for the form and quantity input */
+form {
+  display: flex;
+  align-items: center;
+}
+
+form input[type="hidden"],
+form input[type="number"],
+form input[type="submit"] {
+  margin: 0;
+  margin-right: 10px;
+}
+</style>

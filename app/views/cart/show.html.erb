@@ -1,0 +1,8 @@
+<h1>Ваша Корзина</h1>
+<% @cart.orderables.each do |orderable| %>
+  <% ecomm = orderable.ecomm %>
+  <p><%= ecomm.title %> * <%= orderable.quantity %> = $<%= ecomm.price * orderable.quantity %></p>
+
+       <%= render partial: "cart/cart" if @render_cart %>
+<% end %>
+<p>Ваша общая сумма за товары Rub <%= @cart.total %> </p>

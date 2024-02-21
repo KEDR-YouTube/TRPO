@@ -1,0 +1,37 @@
+<%= form_with(model: ecomm, url: ecomm.persisted? ? ecomm_path(ecomm) : ecomms_path, local: true) do |form| %>
+  <% if ecomm.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(ecomm.errors.count, 'error') %> запретила сохранение этого товара:</h2>
+
+      <ul>
+        <% ecomm.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :Название %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :Описание %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :Цена %>
+    <%= form.text_field :price %>
+  </div>
+
+  <div class="field">
+    <%= form.label :Доставка %>
+    <%= form.text_area :location %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

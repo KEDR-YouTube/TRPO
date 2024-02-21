@@ -1,0 +1,24 @@
+<% @cart.orderables.each do |orderable| %>
+  <% ecomm = orderable.ecomm %>
+  <div id="<%= "cart-#{ecomm.id}" %>">
+    <div style="display:flex;justify-content:space-between;margin: 0em 5em;">
+      <strong>Товар:</strong>
+      <%= ecomm.title %>
+      <strong>Описание:</strong>
+      <%= ecomm.description %>
+      <strong>Цена:</strong>
+      <%= ecomm.price %>
+      <%= form_with(url: cart_add_path) do |f| %>
+        <%= f.hidden_field :id, value: ecomm.id %>
+        <%= f.number_field :quantity, value: orderable.quantity, min: 0 %>
+        <%= f.submit "Добавить в корзину" %>
+      <% end %>
+      <%= form_with(url: cart_remove_path) do |f| %>
+        <%= f.hidden_field :id, value: orderable.id %>
+        <%= f.submit "Х" %>
+      <% end %>
+      <strong>Вы купили на:</strong>
+      <%= orderable.total %>
+    </div>
+  </div>
+<% end %>
